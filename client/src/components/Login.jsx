@@ -1,7 +1,11 @@
 import React,{useState} from 'react'
-// import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom'
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
+
+    
 
 const [user,setUser]=useState({
     name:'',
@@ -9,9 +13,9 @@ const [user,setUser]=useState({
     password:'',
 });
 
-const handleSubmit=(e)=>{
+const handleSubmit=async(e)=>{
     e.preventDefault();
-    console.log(user);
+   
 }
 
 
@@ -49,9 +53,9 @@ const handleSubmit=(e)=>{
 
                 <div className="text-grey-dark mt-6">
                     Don't have an account? 
-                    <a className="no-underline border-b border-blue ml-4 text-blue-500" href="../signup">
+                    <Link className="no-underline border-b border-blue ml-4 text-blue-500" to="/signup">
                         SignUp
-                    </a>.
+                    </Link>.
                 </div>
             </div>
         </div>

@@ -1,7 +1,11 @@
 import React,{useState} from 'react'
-// import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 export default function Signup() {
+
+    const navigate=useNavigate();
 
 const [user,setUser]=useState({
     name:'',
@@ -9,9 +13,29 @@ const [user,setUser]=useState({
     password:'',
 });
 
-const handleSubmit=(e)=>{
+const handleSubmit=async(e)=>{
     e.preventDefault();
-    console.log(user);
+    try{
+        const {data}= await axios.post("http://localhost:8000/register",{
+            ...user
+        },
+        {
+            withCredentials:true,
+        }
+        );
+        if(data){
+            if(!data.errors)
+            {
+                navigate("/login");
+            }
+           
+        }
+
+    }
+    catch(error)
+    {
+        console.log(error);
+    }
 }
 
 

@@ -18,9 +18,6 @@ const handleSubmit=async(e)=>{
     try{
         const {data}= await axios.post("http://localhost:8000/register",{
             ...user
-        },
-        {
-            withCredentials:true,
         }
         );
         if(data){

@@ -7,11 +7,7 @@ const route=require('./Routes/userRoute.js')
 
 
 const app=express();
-app.use(cors({
-    origin:["http://localhost:3000"],
-    method:["GET","POST"],
-    credentials:true,
-}));
+app.use(cors());
 app.use(express.json());
 
 
@@ -19,7 +15,7 @@ dbConnection();
 
 
 //using routes
-app.use('/api',route)
+app.use('/',route)
 
 app.listen(8000,()=>{
     console.log("server is running on 8000");

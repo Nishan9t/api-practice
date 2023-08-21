@@ -14,7 +14,7 @@ route.post('/register',async(req,res)=>{
         const {name,email,password}=req.body;
         //check emptyness of incoming data
         if(!name || !email || !password){
-            return res.json({message:"pleasse enter all the details"})
+            return res.json({message:"please enter all the details"})
         }
 
         //check if the user already exist or not
@@ -27,9 +27,9 @@ route.post('/register',async(req,res)=>{
         const salt = await bcrypt.genSalt(10);
         const hashPassword = await bcrypt.hash(req.body.password,salt);
         //changing password with hash
-        req.body.password=hashPassword;
+        // req.body.password=hashPassword;
         
-        const user = new userModel(req.body);
+        const user = new userModel({...req.body,password:hashPassword});
         await user.save();
         //creating token with id:user._id
         const token =await jwt.sign({id:user._id},process.env.SECRET_KEY,{
@@ -57,3 +57,5 @@ route.post('/login',(req,res)=>{
 route.get('/user',(req,res)=>{
 
 })
+
+module.exports=route;

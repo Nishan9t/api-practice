@@ -78,7 +78,7 @@ route.post('/login',async(req,res)=>{
         }
         );
 
-        return res.cookie({"token":token}).json({success:true,message:"Logged in successfully"});
+        return res.send({data:token,message:"Logged in successfully"});
         
     }
     catch(error)

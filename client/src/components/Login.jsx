@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
 
+    const navigate=useNavigate();
+
     
 
 const [user,setUser]=useState({
@@ -16,10 +18,10 @@ const handleSubmit=async(e)=>{
     e.preventDefault();
 
     try{
-        const {data}=await axios.post('http://localhost:8000/login',{...user});
-        console.log(data);
-        
-        
+        const {data:res}=await axios.post('http://localhost:8000/login',{...user});
+        localStorage.setItem("token",res.data);
+        window.location='/'
+       
 
     }
     catch(error)

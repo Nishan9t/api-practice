@@ -16,7 +16,7 @@ const [user,setUser]=useState({
 const handleSubmit=async(e)=>{
     e.preventDefault();
     try{
-        const {data}= await axios.post("http://localhost:8000/register",{
+        const {data}= await axios.post("http://localhost:8000/signup",{
             ...user
         }
         );

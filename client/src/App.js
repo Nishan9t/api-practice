@@ -1,3 +1,4 @@
+import { Route, Routes } from "react-router-dom";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 
@@ -5,9 +6,11 @@ import Signup from "./components/Signup";
 
 function App() {
   return (
-    <div className="font-bold">
-      <Signup/>
-    </div>
+    <Routes>
+    <Route exact path="/signup" element={<Signup/>} />
+    <Route exact path="/login" element={<Login/>} />
+    
+  </Routes>
   );
 }
 

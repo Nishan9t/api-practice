@@ -8,13 +8,24 @@ export default function Login() {
     
 
 const [user,setUser]=useState({
-    name:'',
     email:'',
     password:'',
 });
 
 const handleSubmit=async(e)=>{
     e.preventDefault();
+
+    try{
+        const {data}=await axios.post('http://localhost:8000/login',{...user});
+        console.log(data);
+        
+        
+
+    }
+    catch(error)
+    {
+        console.log(error)
+    }
    
 }
 

@@ -9,7 +9,7 @@ const route=express.Router();
 const userModel=require('../models/UserModel');
 
 //creating register route
-route.post('/register',async(req,res)=>{
+route.post('/signup',async(req,res)=>{
     try{
         const {name,email,password}=req.body;
         //check emptyness of incoming data

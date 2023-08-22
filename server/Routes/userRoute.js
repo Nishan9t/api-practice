@@ -12,7 +12,7 @@ const userModel=require('../models/UserModel');
 route.post('/signup',async(req,res)=>{
     try{
         const {name,email,password}=req.body;
-        //check emptyness of incoming data
+        //check emptiness of incoming data
         if(!name || !email || !password){
             return res.json({message:"please enter all the details"})
         }
@@ -49,7 +49,44 @@ route.post('/signup',async(req,res)=>{
 })
 
 //creating login route
-route.post('/login',(req,res)=>{
+route.post('/login',async(req,res)=>{
+
+    try{
+        const {email,password}= req.body;
+        //check emptiness of the incoming data
+        if(!email || !password)
+        {
+            return res.json({message:'Please enter all the details'});
+        }
+
+        //check if user already exist or not
+        const userExist = await userModel.findOne({email:req.body.email});
+        if(!userExist)
+        {
+            return res.json({message:"Wrong credentials"});
+        }
+
+        //check password match
+        const isPasswordMatched = await bcrypt.compare(password,userExist.password);
+        if(!isPasswordMatched)
+        {
+            return res.json({message:"Wrong credentials pass"});
+        }
+
+        const token = await jwt.sign({id:userExist._id},process.env.SECRET_KEY,{
+            expiresIn:'24h'
+        }
+        );
+
+        return res.cookie({"token":token}).json({success:true,message:"Logged in successfully"});
+        
+    }
+    catch(error)
+    {
+        return res.json({error:error})
+    }
+
+
 
 })
 

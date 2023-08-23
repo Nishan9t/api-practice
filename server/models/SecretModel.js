@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const secretSchema=mongoose.Schema({
-    message:{
+    text:{
         type:String
     }
 });

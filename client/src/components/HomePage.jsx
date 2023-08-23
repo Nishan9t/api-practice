@@ -1,12 +1,21 @@
 import React, { useState } from 'react'
+import axios from 'axios';
 
 export default function HomePage() {
 
   const [text,setText] = useState('');
 
-  const handleSubmit=(e)=>{
+  const handleSubmit=async(e)=>{
     e.preventDefault();
-    console.log(text);
+    
+    try{
+      const res=await axios.post('http://localhost:8000/secret',{text});
+
+    }
+    catch(error)
+    {
+      console.log(error);
+    }
   }
   
   return (

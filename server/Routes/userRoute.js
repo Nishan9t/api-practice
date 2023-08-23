@@ -8,6 +8,8 @@ const route=express.Router();
 //importing userModel
 const userModel=require('../models/UserModel');
 
+const secretModel=require('../models/SecretModel')
+
 //creating register route
 route.post('/signup',async(req,res)=>{
     try{
@@ -91,8 +93,15 @@ route.post('/login',async(req,res)=>{
 
 })
 
-//Creating user routes to fetch users data
-route.get('/user',(req,res)=>{
+//Creating message routes to store secrets
+route.post('/secret',async(req,res)=>{
+
+    
+    const data=new secretModel({...req.body});
+    await data.save();
+    res.send({success:true,message:"data saved successfully",data:data});
+
+
 
 })
 

@@ -18,9 +18,10 @@ const handleSubmit=async(e)=>{
     e.preventDefault();
 
     try{
-        const {data:res}=await axios.post('http://localhost:8000/login',{...user});
-        localStorage.setItem("token",res.data);
+        const res=await axios.post('http://localhost:8000/login',{...user});
+        localStorage.setItem("token",res.data.data);
         window.location='/'
+       
        
 
     }

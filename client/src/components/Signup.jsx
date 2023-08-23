@@ -16,14 +16,16 @@ const [user,setUser]=useState({
 const handleSubmit=async(e)=>{
     e.preventDefault();
     try{
-        const {data}= await axios.post("http://localhost:8000/signup",{
+        const res= await axios.post("http://localhost:8000/signup",{
             ...user
         }
         );
-        if(data){
-            if(!data.errors)
+        if(res){
+            if(!res.errors)
             {
-                navigate("/login");
+                console.log(res);
+                localStorage.setItem("token",res.data.data);
+                window.location='/';
             }
            
         }

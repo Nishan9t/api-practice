@@ -29,6 +29,7 @@ route.post('/signup',async(req,res)=>{
         //changing password with hash
         // req.body.password=hashPassword;
         
+        //getting user with body same as req.body and change its password with hashPassword
         const user = new userModel({...req.body,password:hashPassword});
         await user.save();
         //creating token with id:user._id
@@ -36,7 +37,7 @@ route.post('/signup',async(req,res)=>{
             expiresIn:'24h'}
         );
         
-    return res.cookie({'token':token}).json({success:true,message:'User registered successfully',data:user})
+    return res.send({data:token,message:'User registered successfully'})
 
 
     }

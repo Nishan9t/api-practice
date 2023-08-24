@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 
 export default function HomePage() {
 
   const [text,setText] = useState('');
+  const [secrets,setSecrets]=useState([]);
 
   const handleSubmit=async(e)=>{
     e.preventDefault();
@@ -17,6 +18,28 @@ export default function HomePage() {
       console.log(error);
     }
   }
+
+  const getSecrets=async()=>{
+    try{
+      const response =await axios.get('http://localhost:8000/')
+      if(response.data.success)
+      {
+        setSecrets(response.data.data);
+        console.log(secrets);
+      }
+    }
+    catch(error)
+    {
+      console.log(error);
+    }
+
+  }
+
+useEffect(()=>{
+ 
+  getSecrets();
+
+},[])
   
   return (
    

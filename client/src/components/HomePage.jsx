@@ -11,6 +11,7 @@ export default function HomePage() {
     
     try{
       const res=await axios.post('http://localhost:8000/secret',{text});
+      setText("");
 
     }
     catch(error)
@@ -21,12 +22,12 @@ export default function HomePage() {
 
   const getSecrets=async()=>{
     try{
-      const response =await axios.get('http://localhost:8000/')
-      if(response.data.success)
-      {
+      await axios.get('http://localhost:8000/')
+      .then((response) => {
         setSecrets(response.data.data);
-        console.log(secrets);
-      }
+      });
+      
+      
     }
     catch(error)
     {
@@ -39,7 +40,7 @@ useEffect(()=>{
  
   getSecrets();
 
-},[])
+},[secrets])
   
   return (
    
@@ -62,6 +63,17 @@ useEffect(()=>{
               Submit
             </button>
           </form>
+          {
+            secrets.map(((sec,ind)=>{
+              return(
+                <div key={ind}>
+                {sec.text}
+                </div>
+              )
+            }))
+          }
+         
+
         </div>
       
    

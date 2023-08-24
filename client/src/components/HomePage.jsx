@@ -52,6 +52,7 @@ useEffect(()=>{
               placeholder="Enter your text here"
               value={text}
               onChange={(e)=>{setText(e.target.value)}}
+              required
             />
             <button
               type='submit'

@@ -2,7 +2,8 @@ const mongoose = require('mongoose');
 
 const secretSchema=mongoose.Schema({
     text:{
-        type:String
+        type:String,
+        required:true,
     }
 });
 

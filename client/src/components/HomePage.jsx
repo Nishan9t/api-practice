@@ -41,7 +41,7 @@ useEffect(()=>{
  
   getSecrets();
 
-},[secrets])
+},[])
 
 const handleLogout=()=>{
   localStorage.removeItem('token');

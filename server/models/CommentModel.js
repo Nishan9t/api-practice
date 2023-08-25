@@ -7,7 +7,7 @@ const commentSchema = mongoose.Schema({
     },
     secretId:{
         type:String,
-    }
+    },
 
 });
 

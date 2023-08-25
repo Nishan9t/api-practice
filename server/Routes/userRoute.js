@@ -8,7 +8,8 @@ const route=express.Router();
 //importing userModel
 const userModel=require('../models/UserModel');
 
-const secretModel=require('../models/SecretModel')
+const secretModel=require('../models/SecretModel');
+const commentModel = require("../models/CommentModel");
 
 //creating register route
 route.post('/signup',async(req,res)=>{
@@ -117,6 +118,15 @@ route.get('/',async(req,res)=>{
     {
         res.status(500).json({error:error});
     }
+})
+
+// add comment
+route.post('/comment',async(req,res)=>{
+
+    const data = new commentModel({...req.body});
+    await  data.save() ;
+    res.send({success:true,message:"comment saved",data:data});
+
 })
 
 module.exports=route;

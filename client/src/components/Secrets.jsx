@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState } from 'react'
 
 export default function Secrets({secrets}) {
@@ -7,13 +8,21 @@ export default function Secrets({secrets}) {
       secretId:''
     })
 
-    const handleComment=(id)=>{
-      // console.log(id)
-      setComment((prevState)=>({
-        ...prevState,
-        secretId:id
-      }));
-      // console.log(comment)
+    const handleComment=async(id)=>{
+  
+
+      try{
+
+        const res =await axios.post('http://localhost:8000/comment',{...comment,secretId:id});
+        setComment("");
+        console.log("comment added")
+
+      }
+      catch(error){
+        console.log(error);
+
+      }
+      
      
     }
 

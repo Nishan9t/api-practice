@@ -13,7 +13,7 @@ export default function Secrets({secrets}) {
         ...prevState,
         secretId:id
       }));
-      console.log(comment)
+      // console.log(comment)
      
     }
 

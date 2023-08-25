@@ -2,20 +2,20 @@ import React, { useState } from 'react'
 
 export default function Secrets({secrets}) {
 
-    // const [comment,setComment]=useState({
-    //   message:'',
-    //   secretId:''
-    // })
+    const [comment,setComment]=useState({
+      message:'',
+      secretId:''
+    })
 
-    // const handleComment=(id)=>{
-      
-    //   setComment((prevState,id)=>({
-    //     ...prevState,
-    //     secretId:id
-    //   }));
-    //   console.log(comment)
+    const handleComment=(id)=>{
+      // console.log(id)
+      setComment((prevState)=>({
+        ...prevState,
+        secretId:id
+      }));
+      console.log(comment)
      
-    // }
+    }
 
   return (
     <div>
@@ -36,14 +36,14 @@ export default function Secrets({secrets}) {
                             className="border w-1/2 mb-2 rounded "
                             placeholder="Enter your text here"
                             name='message'
-                            // onChange={(e)=>{setComment({...comment,[e.target.name]:e.target.value})}}
+                            onChange={(e)=>{setComment({...comment,[e.target.name]:e.target.value})}}
                             required
                             />
 
                             <button
                                 type='submit'
                                 className="text-center mb-2 px-2 rounded bg-green-500 text-white hover:bg-green-dark hover:bg-green-700"
-                                // onClick={()=>{handleComment(sec._id)}}
+                                onClick={()=>{handleComment(sec._id)}}
                             >
                             Post
                             </button>

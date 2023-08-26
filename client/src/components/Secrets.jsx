@@ -1,5 +1,6 @@
 import axios from 'axios';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import Comment from './Comment';
 
 export default function Secrets({secrets}) {
 
@@ -9,13 +10,15 @@ export default function Secrets({secrets}) {
     })
 
     const [allComments,setAllComments] =useState([]);
+    const [click,setClick]=useState(false)
 
     const handleComment=async(id)=>{
       try{
 
         const res =await axios.post('http://localhost:8000/comment',{...comment,secretId:id});
-        setComment("");
+        setComment({...comment});
         console.log("comment added")
+        getComments(id);
 
       }
       catch(error){
@@ -29,8 +32,11 @@ export default function Secrets({secrets}) {
         await axios.get(`http://localhost:8000/allcomments/`+id)
         .then((response)=>{
           setAllComments(response.data.data);
-          console.log(allComments)
-        })
+          // setComment({...comment})
+          
+        });
+        setClick(true);
+        
       }
       catch(error)
       {
@@ -38,11 +44,11 @@ export default function Secrets({secrets}) {
       }
 
     }
+    useEffect(()=>{
 
-    // const useEffect(()=>{
-    //   getComments(id);
-    // },[allComments])
+    },[comment])
 
+   
   return (
     <div>
         <h1 className='text-center mx-auto font-bold text-3xl m-16'>SECRETS ARE HERE</h1>
@@ -73,10 +79,17 @@ export default function Secrets({secrets}) {
                             >
                             Post
                             </button>
-                            <div className='comments'>
-                               <button onClick={()=>{getComments(sec._id)}}>Get comments</button>
-                            </div>
+                           
+                         
+                           
                         </div>
+
+                        <div className='comments'>
+                               <button onClick={()=>{getComments(sec._id)}}>Get comments</button>
+                       </div>
+
+                        {click&& <Comment sec={sec} allComments={allComments}/>}
+                         
                     </div>
                 </div>
               )

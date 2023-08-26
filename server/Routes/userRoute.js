@@ -129,4 +129,22 @@ route.post('/comment',async(req,res)=>{
 
 })
 
+//get all comment
+route.get('/allcomments/:id',async(req,res)=>{
+        
+    const id=req.params.id;
+    console.log(id);
+
+    try{
+        const comments=await commentModel.find({secretId:id});
+        res.status(200).json({success:true,data:comments});
+
+    }
+    catch(error)
+    {
+        res.status(500).json({error:error});
+    }
+
+})
+
 module.exports=route;

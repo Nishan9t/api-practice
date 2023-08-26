@@ -8,9 +8,9 @@ export default function Secrets({secrets}) {
       secretId:''
     })
 
-    const handleComment=async(id)=>{
-  
+    const [allComments,setAllComments] =useState([]);
 
+    const handleComment=async(id)=>{
       try{
 
         const res =await axios.post('http://localhost:8000/comment',{...comment,secretId:id});
@@ -22,9 +22,26 @@ export default function Secrets({secrets}) {
         console.log(error);
 
       }
-      
-     
     }
+
+    const getComments=async(id)=>{
+      try{
+        await axios.get(`http://localhost:8000/allcomments/`+id)
+        .then((response)=>{
+          setAllComments(response.data.data);
+          console.log(allComments)
+        })
+      }
+      catch(error)
+      {
+        console.log(error);
+      }
+
+    }
+
+    // const useEffect(()=>{
+    //   getComments(id);
+    // },[allComments])
 
   return (
     <div>
@@ -56,6 +73,9 @@ export default function Secrets({secrets}) {
                             >
                             Post
                             </button>
+                            <div className='comments'>
+                               <button onClick={()=>{getComments(sec._id)}}>Get comments</button>
+                            </div>
                         </div>
                     </div>
                 </div>

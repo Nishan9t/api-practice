@@ -49,6 +49,12 @@ export default function Secrets({secrets}) {
 
     },)
 
+    const conditionIsMet=(sec,allComments)=>{
+      const isAllCommentsEmpty = !allComments || allComments.length === 0;
+      return sec && !isAllCommentsEmpty && sec._id === allComments[0].secretId;
+
+    }
+
    
   return (
     <div>
@@ -88,10 +94,13 @@ export default function Secrets({secrets}) {
                         </div>
 
                         <div className='comments'>
-                              {click? <button className='text-center ml-2 mb-2 px-2 rounded border-solid bg-gray-500' onClick={()=>{setClick(false)}}>Hide comments</button> :<button className='text-center ml-2 mb-2 px-2 rounded border-solid bg-gray-500' onClick={()=>{getComments(sec._id)}}>Get comments</button>}
+                        
+                              {click && conditionIsMet(sec,allComments) ? <button className='text-center ml-2 mb-2 px-2 rounded border-solid bg-gray-500' onClick={()=>{setClick(false)}}>Hide comments</button> :<button className='text-center ml-2 mb-2 px-2 rounded border-solid bg-gray-500' onClick={()=>{getComments(sec._id)}}>Get comments</button>}
                        </div>
                         
                         {click&& <Comment sec={sec} allComments={allComments}/>}
+
+                       
                          
                     </div>
                 </div>

@@ -1,9 +1,10 @@
 import React from 'react'
 
-export default function Comment({sec,allComments}) {
+export default function Comment({sec,allComments,click,setClick}) {
     
     
   return (
+    
     <div className='ml-4'>
     {
         allComments.map((com,id)=>{
@@ -19,5 +20,6 @@ export default function Comment({sec,allComments}) {
     }
 
     </div>
+   
   )
 }

@@ -50,7 +50,7 @@ const handleLogout=()=>{
   
   return (
     <div>
-          <div className="mx-auto my-2 max-w-7xl px-2 sm:px-6 lg:px-8 bg-gray-500 rounded-lg">
+          <div className="mx-auto my-2 max-w-7xl px-2 sm:px-6 lg:px-8 bg-gray-500 rounded-lg bg-blue-200">
               <div className="relative flex h-16 items-center justify-end">
                     <button
                       type="submit"
@@ -61,7 +61,7 @@ const handleLogout=()=>{
               </div>
           </div>
   
-          <div className="mx-auto my-2 max-w-7xl px-2 sm:px-6 lg:px-8 ">
+          <div className="mx-auto my-2 max-w-7xl px-2 sm:px-6 lg:px-8 bg-green-200 py-4">
                <h1 className='text-center mx-auto font-bold text-3xl m-16'>SECRETS:- that's no one knows</h1>
                 <form onSubmit={(e)=>handleSubmit(e)}>
                   <textarea

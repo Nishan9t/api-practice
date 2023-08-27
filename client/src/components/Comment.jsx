@@ -11,7 +11,7 @@ export default function Comment({sec,allComments,click,setClick}) {
             if(com.secretId==sec._id)
             {
                 return(
-                <div className='m-2 ' key={id}>{com.message}</div>
+                <div className='m-2 border-2' key={id}>{com.message}</div>
             )
 
             }

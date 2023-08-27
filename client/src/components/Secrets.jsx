@@ -57,7 +57,7 @@ export default function Secrets({secrets}) {
 
    
   return (
-    <div>
+    <div className='bg-blue-300 pb-16'>
         <h1 className='text-center mx-auto font-bold text-3xl m-16'>SECRETS ARE HERE</h1>
      {
             secrets.map(((sec,ind)=>{
@@ -65,14 +65,14 @@ export default function Secrets({secrets}) {
              
               return(
                 <div key={ind} className='mx-auto my-2 max-w-7xl sm:px-6 lg:px-8 '>
-                    <div  className='border w-full mb-2 rounded'>
-                        <div className=' px-2 m-4'>
+                    <div  className='border border-black w-full mb-2 rounded'>
+                        <div className=' px-2 m-4 text-xl bold'>
                           
                             {sec.text}
                         </div>
                         <div className='flex flex-row justify-end'>
                             <textarea
-                            className="border w-1/2 mb-2 rounded "
+                            className="border w-1/2 mb-2 rounded bg-green-200 "
                             placeholder="Enter your text here"
                             
                             name='message'
@@ -93,13 +93,14 @@ export default function Secrets({secrets}) {
                            
                         </div>
 
-                        <div className='comments'>
+                        <div className='text-center mx-auto '>
                         
-                              {click && conditionIsMet(sec,allComments) ? <button className='text-center ml-2 mb-2 px-2 rounded border-solid bg-gray-500' onClick={()=>{setClick(false)}}>Hide comments</button> :<button className='text-center ml-2 mb-2 px-2 rounded border-solid bg-gray-500' onClick={()=>{getComments(sec._id)}}>Get comments</button>}
-                       </div>
+                              {click && conditionIsMet(sec,allComments) ? <button className='text-center ml-2 mb-2 px-16 rounded border-solid bg-gray-500 hover:bg-gray-700' onClick={()=>{setClick(false)}}>Hide comments</button> :<button className='text-center ml-2 mb-2 px-16 rounded border-solid bg-gray-500 hover:bg-gray-700' onClick={()=>{getComments(sec._id)}}>Get comments</button>}
+                      
+                        
                         
                         {click&& <Comment sec={sec} allComments={allComments}/>}
-
+                        </div>
                        
                          
                     </div>

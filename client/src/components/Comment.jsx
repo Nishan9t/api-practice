@@ -4,13 +4,13 @@ export default function Comment({sec,allComments}) {
     
     
   return (
-    <div>
+    <div className='ml-4'>
     {
         allComments.map((com,id)=>{
             if(com.secretId==sec._id)
             {
                 return(
-                <div key={id}>{com.message}</div>
+                <div className='m-2 ' key={id}>{com.message}</div>
             )
 
             }

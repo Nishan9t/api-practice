@@ -32,10 +32,11 @@ export default function Secrets({secrets}) {
         await axios.get(`http://localhost:8000/allcomments/`+id)
         .then((response)=>{
           setAllComments(response.data.data);
-          // setComment({...comment})
+          
           
         });
         setClick(true);
+        
         
       }
       catch(error)
@@ -46,7 +47,7 @@ export default function Secrets({secrets}) {
     }
     useEffect(()=>{
 
-    },[comment])
+    },)
 
    
   return (
@@ -67,7 +68,9 @@ export default function Secrets({secrets}) {
                             <textarea
                             className="border w-1/2 mb-2 rounded "
                             placeholder="Enter your text here"
+                            
                             name='message'
+                            
                             onChange={(e)=>{setComment({...comment,[e.target.name]:e.target.value})}}
                             required
                             />
@@ -85,9 +88,9 @@ export default function Secrets({secrets}) {
                         </div>
 
                         <div className='comments'>
-                               <button onClick={()=>{getComments(sec._id)}}>Get comments</button>
+                              {click? <button className='text-center ml-2 mb-2 px-2 rounded border-solid bg-gray-500' onClick={()=>{setClick(false)}}>Hide comments</button> :<button className='text-center ml-2 mb-2 px-2 rounded border-solid bg-gray-500' onClick={()=>{getComments(sec._id)}}>Get comments</button>}
                        </div>
-
+                        
                         {click&& <Comment sec={sec} allComments={allComments}/>}
                          
                     </div>

@@ -1,15 +1,15 @@
-import React,{useState} from 'react'
+import React,{useContext, useState} from 'react'
 import {Link} from 'react-router-dom'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { DataContext } from '../Context/DataProvider';
 
 export default function Login() {
+      const navigate=useNavigate();
 
-    const navigate=useNavigate();
+    const {setUser}=useContext(DataContext);
 
-    
-
-const [user,setUser]=useState({
+const [cus,setCus]=useState({
     email:'',
     password:'',
 });
@@ -20,6 +20,7 @@ const handleSubmit=async(e)=>{
     try{
         const res=await axios.post('http://localhost:8000/login',{...user});
         localStorage.setItem("token",res.data.data);
+        setUser({username:res.data.user.email,email:res.data.user.name});
         window.location='/'
        
        
@@ -45,7 +46,7 @@ const handleSubmit=async(e)=>{
                         className="block border border-grey-light w-full p-3 rounded mb-4"
                         name="email"
                         placeholder="Email" 
-                        onChange={(e)=>setUser({...user,[e.target.name]:e.target.value})}
+                        onChange={(e)=>setCus({...user,[e.target.name]:e.target.value})}
                         />
 
                     <input 
@@ -53,7 +54,7 @@ const handleSubmit=async(e)=>{
                         className="block border border-grey-light w-full p-3 rounded mb-4"
                         name="password"
                         placeholder="Password"
-                        onChange={(e)=>setUser({...user,[e.target.name]:e.target.value})}
+                        onChange={(e)=>setCus({...user,[e.target.name]:e.target.value})}
                          />
                    
 

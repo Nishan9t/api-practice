@@ -40,7 +40,7 @@ route.post('/signup',async(req,res)=>{
             expiresIn:'24h'}
         );
         
-    return res.send({data:token,message:'User registered successfully'})
+    return res.send({data:token,message:'User registered successfully',user:user})
 
 
     }
@@ -82,7 +82,7 @@ route.post('/login',async(req,res)=>{
         }
         );
 
-        return res.send({data:token,message:"Logged in successfully"});
+        return res.send({data:token,message:"Logged in successfully",user:userExist});
         
     }
     catch(error)

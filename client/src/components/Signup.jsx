@@ -7,7 +7,7 @@ import { DataContext } from '../Context/DataProvider';
 export default function Signup() {
 
     const navigate=useNavigate();
-    const {setUser}=useContext(DataContext);
+    const {user,setUser}=useContext(DataContext);
 
 const [cus,setCus]=useState({
     name:'',
@@ -19,17 +19,17 @@ const handleSubmit=async(e)=>{
     e.preventDefault();
     try{
         const res= await axios.post("http://localhost:8000/signup",{
-            ...user
+            ...cus
         }
         );
         if(res){
             if(!res.errors)
             {
                 console.log(res);
-                localStorage.setItem("token",res.data.data);
-                setUser({username:res.data.user.email,email:res.data.user.name});
-                
-                window.location='/';
+                // localStorage.setItem("token",res.data.data);
+                // setUser({...user,username:res.data.user.name,email:res.data.user.email});
+                navigate("/login")
+                // window.location='/';
             }
            
         }
@@ -53,7 +53,7 @@ const handleSubmit=async(e)=>{
                         className="block border border-grey-light w-full p-3 rounded mb-4"
                         name="name"
                         placeholder="Full Name" 
-                        onChange={(e)=>setCus({...user,[e.target.name]:e.target.value})}
+                        onChange={(e)=>setCus({...cus,[e.target.name]:e.target.value})}
                         />
                         
                     <input 
@@ -61,7 +61,7 @@ const handleSubmit=async(e)=>{
                         className="block border border-grey-light w-full p-3 rounded mb-4"
                         name="email"
                         placeholder="Email" 
-                        onChange={(e)=>setCus({...user,[e.target.name]:e.target.value})}
+                        onChange={(e)=>setCus({...cus,[e.target.name]:e.target.value})}
                         />
 
                     <input 
@@ -69,7 +69,7 @@ const handleSubmit=async(e)=>{
                         className="block border border-grey-light w-full p-3 rounded mb-4"
                         name="password"
                         placeholder="Password"
-                        onChange={(e)=>setCus({...user,[e.target.name]:e.target.value})}
+                        onChange={(e)=>setCus({...cus,[e.target.name]:e.target.value})}
                          />
                    
 

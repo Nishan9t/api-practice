@@ -1,13 +1,13 @@
-import React,{useContext, useState} from 'react'
+import React,{useContext, useEffect, useState} from 'react'
 import {Link} from 'react-router-dom'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { DataContext } from '../Context/DataProvider';
 
 export default function Login() {
-      const navigate=useNavigate();
+    const navigate=useNavigate();
 
-    const {setUser}=useContext(DataContext);
+    const {user,setUser}=useContext(DataContext);
 
 const [cus,setCus]=useState({
     email:'',
@@ -18,13 +18,17 @@ const handleSubmit=async(e)=>{
     e.preventDefault();
 
     try{
-        const res=await axios.post('http://localhost:8000/login',{...user});
+        const res=await axios.post('http://localhost:8000/login',{...cus});
+        
+        await setUser({username:res.data.user.name,email:res.data.user.email});
         localStorage.setItem("token",res.data.data);
-        setUser({username:res.data.user.email,email:res.data.user.name});
+        // console.log(res.data.user)
+       if(user.username)
+       {
+        console.log(user);
         window.location='/'
-       
-       
-
+       }
+        
     }
     catch(error)
     {
@@ -32,6 +36,10 @@ const handleSubmit=async(e)=>{
     }
    
 }
+useEffect(()=>{
+console.log(user)
+},[user])
+
 
 
   return (
@@ -46,7 +54,7 @@ const handleSubmit=async(e)=>{
                         className="block border border-grey-light w-full p-3 rounded mb-4"
                         name="email"
                         placeholder="Email" 
-                        onChange={(e)=>setCus({...user,[e.target.name]:e.target.value})}
+                        onChange={(e)=>setCus({...cus,[e.target.name]:e.target.value})}
                         />
 
                     <input 
@@ -54,7 +62,7 @@ const handleSubmit=async(e)=>{
                         className="block border border-grey-light w-full p-3 rounded mb-4"
                         name="password"
                         placeholder="Password"
-                        onChange={(e)=>setCus({...user,[e.target.name]:e.target.value})}
+                        onChange={(e)=>setCus({...cus,[e.target.name]:e.target.value})}
                          />
                    
 
@@ -65,6 +73,7 @@ const handleSubmit=async(e)=>{
                     </button>
 
                 </form>
+                {/* {user? <h1>Welcome {user.username}</h1>:<h1>Please login</h1>} */}
 
                 <div className="text-grey-dark mt-6">
                     Don't have an account? 

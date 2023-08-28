@@ -9,7 +9,7 @@ export default function HomePage() {
   const [secrets,setSecrets]=useState([]);
 
   const {user}=useContext(DataContext);
- 
+
   const handleSubmit=async(e)=>{
     e.preventDefault();
     
@@ -49,11 +49,14 @@ useEffect(()=>{
 
 const handleLogout=()=>{
   localStorage.removeItem('token');
+  localStorage.removeItem('username');
+  localStorage.removeItem('useremail');
   window.location.reload();
 }
 
 useEffect(()=>{
   console.log(user)
+ 
   
 },[user])
 
@@ -62,7 +65,7 @@ useEffect(()=>{
     <div>
           <div className="mx-auto my-2 max-w-7xl px-2 sm:px-6 lg:px-8 bg-gray-500 rounded-lg bg-blue-200">
               <div className="relative flex h-16 items-center justify-between">
-                 <h1 className='bold text-xl text-white'>{user.username}</h1> 
+                 <h1 className='bold text-xl text-white'>Welcome, {localStorage.getItem("username")}</h1> 
                     <button
                       type="submit"
                       className="px-4 right-2 text-center py-3 rounded bg-green-500 text-white hover:bg-green-dark hover:bg-green-700 my-1"

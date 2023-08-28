@@ -26,7 +26,11 @@ const handleSubmit=async(e)=>{
        if(user.username)
        {
         console.log(user);
+        localStorage.setItem("username",user.username);
+        localStorage.setItem("useremail",user.email);
+
         window.location='/'
+
        }
         
     }
@@ -36,9 +40,7 @@ const handleSubmit=async(e)=>{
     }
    
 }
-useEffect(()=>{
-console.log(user)
-},[user])
+
 
 
 

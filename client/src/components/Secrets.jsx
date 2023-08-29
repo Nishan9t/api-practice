@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import Comment from './Comment';
+import {AiFillDelete} from 'react-icons/ai'
 
 export default function Secrets({secrets}) {
 
@@ -66,6 +67,7 @@ export default function Secrets({secrets}) {
               return(
                 <div key={ind} className='mx-auto my-2 max-w-7xl sm:px-6 lg:px-8 '>
                     <div  className='border border-black w-full mb-2 rounded'>
+                      <button className='text-red-500 border border-2 p-2 bg-green-500 hover:text-lg rounded'><AiFillDelete/></button>
                         <div className=' px-2 m-4 text-xl bold'>
                           
                             {sec.text}

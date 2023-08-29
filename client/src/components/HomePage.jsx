@@ -19,7 +19,7 @@ export default function HomePage() {
     
     try{
       const res=await axios.post('http://localhost:8000/secret',{...secret});
-      setSecret({...secret,text:""});
+      setSecret({...secret,text:""})
       getSecrets();
 
     }
@@ -86,8 +86,8 @@ const handleLogout=()=>{
                     className="border p-2 w-full mb-2 rounded "
                     name="text"
                     placeholder="Enter your secret here"
-                    // value={text.text}
-                    onChange={(e)=>{setSecret({...secret,[e.target.name]:e.target.value})}}
+                    value={secret.text}
+                    onChange={(e)=>{setSecret({...secret,[e.target.name]:e.target.value,useremail:localStorage.getItem("useremail")})}}
                     required
                   />
                   <button

@@ -17,7 +17,7 @@ export default function Secrets({secrets,getSecrets}) {
       try{
 
         const res =await axios.post('http://localhost:8000/comment',{...comment,secretId:id});
-        setComment({...comment});
+        // setComment({...comment,message:""});
         console.log("comment added")
         getComments(id);
 
@@ -108,7 +108,7 @@ export default function Secrets({secrets,getSecrets}) {
                             <textarea
                             className="border w-1/2 mb-2 rounded bg-green-200 "
                             placeholder="Enter your text here"
-                            
+                            // value={comment.message}
                             name='message'
                             
                             onChange={(e)=>{setComment({...comment,[e.target.name]:e.target.value})}}

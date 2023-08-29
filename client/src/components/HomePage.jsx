@@ -99,7 +99,7 @@ const handleLogout=()=>{
                   </button>
                 </form>
           </div>
-          <Secrets secrets={secrets}/>
+          <Secrets secrets={secrets} getSecrets={getSecrets}/>
           
       
         </div>

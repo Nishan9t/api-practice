@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import Comment from './Comment';
 import {AiFillDelete} from 'react-icons/ai'
 
-export default function Secrets({secrets}) {
+export default function Secrets({secrets,getSecrets}) {
 
     const [comment,setComment]=useState({
       message:'',
@@ -46,9 +46,41 @@ export default function Secrets({secrets}) {
       }
 
     }
+
+    const deleteSecret=async(id)=>{
+
+      try{
+        const res =await axios.delete(`http://localhost:8000/delete/`+id)
+        getSecrets();
+
+      }
+      catch(error)
+      {
+        console.log(error);
+      }
+
+    }
+
+    const handleDelete=(secretEmail,secretId)=>{
+      const currentUser = localStorage.getItem("useremail");
+
+      if(currentUser===secretEmail)
+      {
+        deleteSecret(secretId);
+
+      }
+      else{
+        alert("only user who created the particular secret can delete the secret");
+      }
+
+    }
+
+
+
     useEffect(()=>{
 
-    },)
+    },[secrets])
+
 
     const conditionIsMet=(sec,allComments)=>{
       const isAllCommentsEmpty = !allComments || allComments.length === 0;
@@ -67,7 +99,7 @@ export default function Secrets({secrets}) {
               return(
                 <div key={ind} className='mx-auto my-2 max-w-7xl sm:px-6 lg:px-8 '>
                     <div  className='border border-black w-full mb-2 rounded'>
-                      <button className='text-red-500 border border-2 p-2 bg-green-500 hover:text-lg rounded'><AiFillDelete/></button>
+                      <button className='text-red-500 border border-2 p-2 bg-green-500 hover:text-lg rounded' onClick={()=>handleDelete(sec.useremail,sec._id)}><AiFillDelete/></button>
                         <div className=' px-2 m-4 text-xl bold'>
                           
                             {sec.text}

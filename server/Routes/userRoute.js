@@ -120,6 +120,23 @@ route.get('/',async(req,res)=>{
     }
 })
 
+//delete secret
+route.delete('/delete/:id',async(req,res)=>{
+    // console.log(req)
+    const id=req.params.id;
+    // console.log(id)
+    try{
+        const secrets= await secretModel.deleteOne({_id:id});
+        res.status(200).json({success:true,data:secrets});
+    }
+    catch(error)
+    {
+        res.status(500).json({error:error})
+    }
+})
+
+
+
 // add comment
 route.post('/comment',async(req,res)=>{
 

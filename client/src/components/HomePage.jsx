@@ -5,17 +5,21 @@ import { DataContext } from '../Context/DataProvider';
 
 export default function HomePage() {
 
-  const [text,setText] = useState('');
+  const [secret,setSecret] = useState({
+    text:'',
+    useremail:localStorage.getItem("useremail"),
+  });
   const [secrets,setSecrets]=useState([]);
 
-  const {user}=useContext(DataContext);
+  // const {user}=useContext(DataContext);
 
   const handleSubmit=async(e)=>{
     e.preventDefault();
+    console.log(secret)
     
     try{
-      const res=await axios.post('http://localhost:8000/secret',{text});
-      setText("");
+      const res=await axios.post('http://localhost:8000/secret',{...secret});
+      setSecret({...secret,text:""});
       getSecrets();
 
     }
@@ -54,11 +58,11 @@ const handleLogout=()=>{
   window.location.reload();
 }
 
-useEffect(()=>{
-  console.log(user)
+// useEffect(()=>{
+//   console.log(user)
  
   
-},[user])
+// },[user])
 
   
   return (
@@ -80,9 +84,10 @@ useEffect(()=>{
                 <form onSubmit={(e)=>handleSubmit(e)}>
                   <textarea
                     className="border p-2 w-full mb-2 rounded "
+                    name="text"
                     placeholder="Enter your secret here"
-                    value={text}
-                    onChange={(e)=>{setText(e.target.value)}}
+                    // value={text.text}
+                    onChange={(e)=>{setSecret({...secret,[e.target.name]:e.target.value})}}
                     required
                   />
                   <button

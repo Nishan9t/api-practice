@@ -4,6 +4,10 @@ const secretSchema=mongoose.Schema({
     text:{
         type:String,
         required:true,
+    },
+    useremail:{
+        type:String,
+        required:true,
     }
 });
 
